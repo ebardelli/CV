@@ -1,0 +1,173 @@
+\documentclass[11pt,letter,sans]{moderncv}
+
+\moderncvstyle{banking}
+\moderncvcolor{black}
+
+\usepackage[margin=1in]{geometry}
+\setlength{\hintscolumnwidth}{1cm}                % if you want to change the width of the column with the dates
+
+% font loading
+% for luatex and xetex, do not use inputenc and fontenc
+% see https://tex.stackexchange.com/a/496643
+\ifxetexorluatex
+  \usepackage{fontspec}
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX}
+  \setmainfont{Latin Modern Roman}
+  \setsansfont{Latin Modern Sans}
+  \setmonofont{Latin Modern Mono}
+  \setmathfont{Latin Modern Math} 
+\else
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+\fi
+
+% document language
+\usepackage[english]{babel}  % FIXME: using spanish breaks moderncv
+\usepackage{csquotes}
+
+\usepackage[style=apa,sorting=ydnt,dashed=false]{biblatex}
+
+%% Macros for publication lists
+\renewbibmacro*{date}{}
+\renewbibmacro*{issue+date}{}
+\newcommand*{\bibyear}{}
+
+\defbibenvironment{bibliography}
+  {\list
+     {\iffieldequals{year}{\bibyear}
+        {}
+        {\printfield{year}%
+         \savefield{year}{\bibyear}}}
+     {\setlength{\topsep}{0pt}% layout parameters based on moderncvstyleclassic.sty
+      \setlength{\labelwidth}{\hintscolumnwidth}%
+      \setlength{\labelsep}{\separatorcolumnwidth}%
+      \setlength{\itemsep}{\bibitemsep}%
+      %\leftmargin\labelwidth%
+      %\advance\leftmargin\labelsep}%
+      \leftmargin0em%
+      \advance\leftmargin0em}%
+      \sloppy\clubpenalty4000\widowpenalty4000}
+  {\endlist}
+  {\item}
+
+\name{Emanuele}{Bardelli}
+\address{School of Education, 610 E. University Ave., Ann Arbor, MI 48109}
+\phone{(734) 764-5646}
+\email{bardelli@umich.edu}
+\homepage{https://ebardelli.com}
+
+\addbibresource{publications.bib}
+
+%% Bold my name in reference list
+\def\makenamesetup{%
+  \def\bibnamedelima{~}%
+  \def\bibnamedelimb{ }%
+  \def\bibnamedelimc{ }%
+  \def\bibnamedelimd{ }%
+  \def\bibnamedelimi{ }%
+  \def\bibinitperiod{.}%
+  \def\bibinitdelim{~}%
+  \def\bibinithyphendelim{.-}}    
+\newcommand*{\makename}[2]{\begingroup\makenamesetup\xdef#1{#2}\endgroup}
+
+\newcommand*{\boldname}[3]{%
+  \def\lastname{#1}%
+  \def\firstname{#2}%
+  \def\firstinit{#3}}
+\boldname{}{}{}
+
+% Patch new definitions
+\renewcommand{\mkbibnamegiven}[1]{%
+  \ifboolexpr{ ( test {\ifdefequal{\firstname}{\namepartgiven}} or test {\ifdefequal{\firstinit}{\namepartgiven}} ) and test {\ifdefequal{\lastname}{\namepartfamily}} }
+  {\mkbibbold{#1}}{#1}%
+}
+
+\renewcommand{\mkbibnamefamily}[1]{%
+  \ifboolexpr{ ( test {\ifdefequal{\firstname}{\namepartgiven}} or test {\ifdefequal{\firstinit}{\namepartgiven}} ) and test {\ifdefequal{\lastname}{\namepartfamily}} }
+  {\mkbibbold{#1}}{#1}%
+}
+
+%% Footer
+\fancyfoot[l]{\parbox[b]{10cm}{\color{color2}Updated: \today}}
+
+\begin{document}
+\makecvtitle
+
+\section{Education}
+\cventry{2016--2022}{PhD in Educational Studies}{University of Michigan}{Ann Arbor, MI}{}{Dissertation Committee: Dr.~Matthew Ronfeldt (chair), Dr.~Brian Jacob (cognate), Dr.~Deborah Ball, Dr.~Susan Dynarski}
+\cventry{2020--2021}{Master's of Arts in Education}{California State University, Los Angeles}{Los Angeles, CA}{}{Concentration in Mathematics and Science Teaching\newline
+Single Subject Teaching Credential: K-12 Mathematics\newline
+Thesis: \textit{The Effects of the Classroom Assessment Environment on Student Self-efficacy, Motivation, and Achievement Goals}---Advisors: Dr.~John Shindler and Dr.~A.Dee Williams}
+\cventry{2005--2008}{Bachelor's of Science in Mathematics}{Università Degli Studi di Modena e Reggio Emilia}{Modena, Italy}{110/110 with Honors}{Thesis: \textit{Generation of 3-Dimensional Rigid Spheres}---Advisor: Dr.~Carlo Gagliardi}
+
+%% List publications
+\nocite{*}
+\boldname{Bardelli}{Emanuele}{E.}
+\printbibliography[title={Peer-Reviewed Publications}]
+
+%% Working Papers
+\begin{refsection}[working-papers.bib]
+\nocite{*}
+\boldname{Bardelli}{Emanuele}{E.}
+\printbibliography[title={Working Papers}]
+\end{refsection}
+
+%% Talks
+\begin{refsection}[talks.bib]
+\nocite{*}
+\boldname{Bardelli}{Emanuele}{E.}
+\printbibliography[title={Conference Papers}]
+\end{refsection}
+
+%% Talks - Non-presenting
+\begin{refsection}[talks-non-presenting.bib]
+\nocite{*}
+\boldname{Bardelli}{Emanuele}{E.}
+\printbibliography[title={Conference Papers - Non-presenting Author}]
+\end{refsection}
+
+\section{Honors and Awards}
+\cventry{}{University of Michigan}{Rackham's One-Term Dissertation Finishing Grant}{2022}{}{}
+\cventry{}{University of Michigan}{Institute of Education Sciences Pre-Doctoral Fellowship}{2017--2022}{Pre-doctoral training in causal inference in education}{}
+\cventry{}{University of Michigan}{School of Education Scholar Award}{2016--2022}{}{} 
+\cventry{}{Honorable mention}{National Science Foundation Graduate Research Fellowship}{2017}{}{}
+\cventry{}{University of Michigan}{Horace H. Rackham School of Graduate Studies Regents Fellowship}{2016--2017}{}{}
+\cventry{}{Università Degli Studi di Modena e Reggio Emilia}{Department of Natural and Physical Sciences}{2005--2008}{Merit Scholarship}{}
+
+\section{Research Experience}
+\cventry{}{Graduate Student Research Assistant}{Multiple research projects}{2016--2021}{}{School of Education, University of Michigan}
+
+\section{Teaching Experience}
+\subsection{Graduate-level Courses}
+\cventry{}{Graduate Student Instructor for Dr.~Matthew Ronfeldt}{Research and Educational Practice (EDUC 695)}{Fall 2021}{}{University of Michigan}
+\cventry{}{Graduate Student Instructor for Dr.~Matthew Ronfeldt}{Research and Educational Practice (EDUC 695)}{Fall 2020}{}{University of Michigan}
+\cventry{}{Graduate Student Instructor for Dr.~Matthew Diemer}{Structural Equation Modeling (EDUC 803)}{Winter 2019}{}{University of Michigan}
+\cventry{}{Graduate Student Instructor for Dr.~Matthew Diemer}{Psychometrics (EDUC 707)}{Fall 2018}{}{University of Michigan}
+
+\subsection{Professional Development of In-Service Teachers}
+\cventry{}{AVID Summer Institute}{Facilitator}{2016}{}{Sacramento, California}
+\cventry{}{Curriculum and Instruction Department}{Instructional Coach}{2015--2016}{}{Lodi Unified School District, Lodi, California}
+
+\subsection{K-12 Teaching Experience}
+\cventry{}{Bear Creek High School}{Mathematics Instructor}{2015}{Summer Enrichment Program}{Stockton, California}
+\cventry{}{Joe Serna Junior Charter School}{Mathematics Teacher}{2012--2015}{Grades 6-8 Mathematics and AVID}{Lodi, California}
+\cventry{}{Woodrow Wilson Senior High School}{Mathematics Teacher}{2010--2012}{Grades 9-12 Mathematics}{Los Angeles, California}
+\cventry{}{Woodrow Wilson High School}{Urban Teacher Resident}{2010--2011}{Los Angeles Urban Teacher Residency}{Los Angeles, California}
+
+\section{Professional Service}
+\cventry{}{Journals}{Peer Reviewer}{2017--Present}{}{Educational Studies in Mathematics, Journal for Research in Mathematics Education, Educational Evaluation and Policy Analysis, Journal of Cognition and Development}
+\cventry{}{Conferences}{Peer Reviewer}{2017--Present}{}{American Educational Research Association, Psychology of Mathematics Education – North America, Research in Undergraduate Mathematics Education, National Council of Teachers of Mathematics, Association of Mathematics Teacher Educators}
+\cventry{}{Graduate Student Representative for Educational Studies}{Dean Advisory Committee Member}{2018--2020}{}{School of Education, University of Michigan}
+\cventry{}{Causal Inference in Education Research Seminar}{Graduate Student Co-coordinator}{2020--2021}{}{School of Education, University of Michigan}
+\cventry{}{Education in Mathematics, Science, and Technology research workshop}{Graduate Student Co-coordinator}{2019--2020}{}{School of Education, University of Michigan}
+\cventry{}{Department of Curriculum and Instruction}{Placement Policy and Assessment Consultant}{2016--2018}{}{Lodi Unified School District}
+\cventry{}{Joe Serna Junior Charter School}{Advisory Board Member}{2013--2016}{}{Lodi Unified School District, Lodi, California}
+\cventry{}{United Friends of the Children}{Tutor}{2010--2012}{}{Los Angeles, California	}
+
+\section{Advanced Methods Training}
+\cvitem{Statistical and Mathematical Software}{Stata, R, C++, Python, Ruby}
+\cvitem{Advanced Research Methods}{Causal Inference Methods, Psychometrics, Structural Equation Modeling, Systemic Functional Linguistics}
+
+\end{document}
